@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "bootstrap";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function List() {
   const [products, setProducts] = useState([]);
@@ -31,5 +32,33 @@ export default function List() {
     if (!isConfirm) {
       return;
     }
+    await axios
+      .delete(`http://http://127.0.0.1:8000/api/products/${id}`)
+      .then(({ data }) => {
+        Swal.fire({
+          icon: "Success",
+          text: data.message,
+        });
+        fetchProducts();
+      })
+      .catch(({ response: { data } }) => {
+        Swal.fire({
+          text: data.message,
+          icon: "error",
+        });
+      });
   };
+
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <Link
+            className="btn btn-primary mb-2 float-end"
+            to={"/product/create"}
+          ></Link>
+        </div>
+      </div>
+    </div>
+  );
 }
