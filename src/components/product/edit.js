@@ -141,7 +141,7 @@ export default function CreateProduct() {
                   block="block"
                   type="submit"
                 >
-                  Save
+                  Update
                 </Button>
               </Form>
             </div>
