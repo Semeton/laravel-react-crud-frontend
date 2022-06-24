@@ -7,7 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function CreateProduct() {
+export default function EditUser() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [title, setTitle] = useState("");
@@ -91,7 +91,7 @@ export default function CreateProduct() {
                   </div>
                 </div>
               )}
-              <Form onSubmit={createProduct}>
+              <Form onSubmit={updateProduct}>
                 <Row>
                   <Col>
                     <Form.Group controlId="Name">

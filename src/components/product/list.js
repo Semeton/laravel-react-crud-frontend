@@ -8,4 +8,28 @@ export default function List() {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    await axios
+      .get(`http://http://127.0.0.1:8000/api/products/${id}`)
+      .then(({ data }) => {
+        setProducts(data);
+      });
+  };
+
+  const deleteProduct = async (id) => {
+    const isConfirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You wont be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonText: "Yes, delete it!",
+    }).then((result) => {
+      return result.isConfirmed;
+    });
+    if (!isConfirm) {
+      return;
+    }
+  };
 }
