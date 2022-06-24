@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Button from "bootstrap";
+import Button from "bootstrap/Button";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function List() {
+export default function ProductList() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     fetchProducts();
