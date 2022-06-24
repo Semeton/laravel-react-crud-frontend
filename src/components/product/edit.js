@@ -5,14 +5,35 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function CreateProduct() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [validationError, setValidationError] = useState({});
+
+  useEffect(() => {
+    fetchProduct();
+  }, []);
+
+  const fetchProduct = async () => {
+    await axios
+      .get(`http://http://127.0.0.1:8000/api/products/${id}`)
+      .then(({ data }) => {
+        const { title, description } = data.product;
+        setTitle(title);
+        setDescription(description);
+      }).catch(({response:{data}})=>{
+          Swal.fire({
+              text:data.message,
+              icon:"error"
+          })
+      })
+  };
+
   const changeHandler = (event) => {
     setImage(event.target.files[0]);
   };
@@ -25,7 +46,7 @@ export default function CreateProduct() {
     formData.append("image", image);
 
     await axios
-      .post("http://http://127.0.0.1:8000/api/products", formData)
+      .post(`http://http://127.0.0.1:8000/api/products`, formData)
       .then(({ data }) => {
         Swal.fire({
           icon: "Success",
