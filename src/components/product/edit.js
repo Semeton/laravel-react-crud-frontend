@@ -26,27 +26,31 @@ export default function CreateProduct() {
         const { title, description } = data.product;
         setTitle(title);
         setDescription(description);
-      }).catch(({response:{data}})=>{
-          Swal.fire({
-              text:data.message,
-              icon:"error"
-          })
       })
+      .catch(({ response: { data } }) => {
+        Swal.fire({
+          text: data.message,
+          icon: "error",
+        });
+      });
   };
 
   const changeHandler = (event) => {
     setImage(event.target.files[0]);
   };
-  const createProduct = async (e) => {
+
+  const updateProduct = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("image", image);
+    if (image !== null) {
+      formData.append("image", image);
+    }
 
     await axios
-      .post(`http://http://127.0.0.1:8000/api/products`, formData)
+      .post(`http://http://127.0.0.1:8000/api/products/${id}`, formData)
       .then(({ data }) => {
         Swal.fire({
           icon: "Success",
@@ -71,7 +75,7 @@ export default function CreateProduct() {
       <div className="row justify-content-center">
         <div className="card">
           <div className="card-body">
-            <h4 className="card-title">Create Product</h4>
+            <h4 className="card-title">Update Product</h4>
             <hr />
             <div className="form-wrapper">
               {Object.keys(validationError).length > 0 && (
