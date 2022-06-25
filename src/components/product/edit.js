@@ -17,7 +17,7 @@ export default function EditProduct() {
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  });
 
   const fetchProduct = async () => {
     await axios

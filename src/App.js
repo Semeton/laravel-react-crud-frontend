@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
@@ -15,6 +15,9 @@ import CreateProduct from "./components/product/create";
 function App() {
   return (
     <Router>
+      <div>
+        <h1>Hello World</h1>
+      </div>
       <Navbar bg="primary">
         <Container>
           <Link to={"/"} className="navbar-brand text-white">

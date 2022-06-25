@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Button from "bootstrap/Button";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -12,7 +12,7 @@ export default function ProductList() {
 
   const fetchProducts = async () => {
     await axios
-      .get(`http://http://127.0.0.1:8000/api/products/${id}`)
+      .get(`http://http://127.0.0.1:8000/api/products`)
       .then(({ data }) => {
         setProducts(data);
       });
@@ -80,6 +80,7 @@ export default function ProductList() {
                           <img
                             width="50px"
                             src={`http://http://127.0.0.1:8000/storage/product/image/${row.image}`}
+                            alt="desc"
                           />
                         </td>
                         <td>
